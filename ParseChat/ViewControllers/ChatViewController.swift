@@ -16,11 +16,16 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var chatMessages: [String] = []
     var chatUsers: [String] = []
     var chatDates: [String] = []
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.onTimer(_:)), userInfo: nil, repeats: true)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(ChatViewController.didPullToRefresh(_:)), for: .valueChanged)
+        chatTableView.insertSubview(refreshControl, at: 0)
         
         self.chatTableView.dataSource = self
         self.chatTableView.delegate = self
@@ -29,6 +34,10 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         chatTableView.rowHeight = UITableViewAutomaticDimension
         // Provide an estimated row height. Used for calculating scroll indicator
         chatTableView.estimatedRowHeight = 50
+        
+        // bubbly messages
+        chatTableView.separatorStyle = .none
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -123,6 +132,16 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print(error?.localizedDescription)
             }
         }
+        
+        self.refreshControl.endRefreshing()
+    }
+    
+    @IBAction func onLogoutButtonPressed(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
+    }
+    
+    @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
+        onTimer(nil)
     }
     
     /*

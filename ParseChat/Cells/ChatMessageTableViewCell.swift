@@ -13,11 +13,15 @@ class ChatMessageTableViewCell: UITableViewCell {
     @IBOutlet weak var chatMessageLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var bubblyCell: UIView!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        bubblyCell.layer.cornerRadius = 10
+        bubblyCell.clipsToBounds = true
+        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

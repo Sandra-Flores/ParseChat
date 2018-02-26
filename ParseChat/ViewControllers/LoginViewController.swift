@@ -33,7 +33,6 @@ class LoginViewController: UIViewController {
         
         // set user properties
         newUser.username = usernameTextField.text ?? ""
-        newUser.email = ""
         newUser.password = passwordTextField.text ?? ""
         
         if (newUser.username?.isEmpty)!{
@@ -73,12 +72,8 @@ class LoginViewController: UIViewController {
             newUser.signUpInBackground { (success: Bool, error: Error?) in
                 if let error = error {
                     print(error.localizedDescription)
-                } else {
-                    print("User Registered successfully")
-                    // manually segue to logged in view
                     
-                    
-                    let alertController = UIAlertController(title: "Welcome!", message: "Signed up successfully", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Error", message: "unable to signup", preferredStyle: .alert)
                     
                     // create an OK action
                     let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
@@ -90,10 +85,13 @@ class LoginViewController: UIViewController {
                     self.present(alertController, animated: true) {
                         // optional code for what happens after the alert controller has finished presenting
                     }
+                    
+                } else {
+                    print("User Registered successfully")
+                    // manually segue to logged in view
+                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
                 }
             }
-            
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
 
         }//else
         
