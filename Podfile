@@ -13,7 +13,6 @@ target 'ParseChat' do
   pod 'OAuthSwift', '~> 1.1.0'
   pod 'OAuthSwiftAlamofire'
 
-
   target 'ParseChatTests' do
     inherit! :search_paths
     # Pods for testing
@@ -33,6 +32,6 @@ target 'ParseChat' do
            end
          end
        end
-     
+
 
 end
