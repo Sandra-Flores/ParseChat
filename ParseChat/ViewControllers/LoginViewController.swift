@@ -73,7 +73,7 @@ class LoginViewController: UIViewController {
                 if let error = error {
                     print(error.localizedDescription)
                     
-                    let alertController = UIAlertController(title: "Error", message: "unable to signup", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
                     
                     // create an OK action
                     let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
@@ -140,7 +140,7 @@ class LoginViewController: UIViewController {
                     print("User log in failed: \(error.localizedDescription)")
                     
                     
-                    let alertController = UIAlertController(title: "Error", message: "There was an error during login\nPlease try again", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
                     
                     // create an OK action
                     let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
